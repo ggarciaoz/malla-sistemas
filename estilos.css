@@ -1,0 +1,117 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffe4fa;
+  color: #d81b60;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  color: #ad1457;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 0 #fff6fa;
+}
+
+#malla {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 18px;
+  max-width: 1400px;
+  margin: 50px auto 0 auto;
+  padding: 20px;
+}
+
+.semestre-titulo {
+  grid-column: span 1;
+  writing-mode: vertical-rl;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em;
+  background: #fce4ec;
+  border-radius: 10px;
+  color: #ad1457;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.ramo {
+  background: #fff0f5;
+  border: 2px solid #f06292;
+  border-radius: 12px;
+  box-shadow: 1px 2px 8px #ffd1e4c0;
+  padding: 12px 10px 14px 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  min-width: 180px;
+  min-height: 70px;
+  position: relative;
+  transition: background 0.12s, border 0.12s, box-shadow 0.12s;
+  user-select: none;
+  outline: none;
+}
+
+.ramo:active {
+  box-shadow: 0 0 0 #fff0f5;
+}
+
+.ramo.bloqueado {
+  background: #f8bbd0;
+  color: #d81b60a5;
+  border-style: dashed;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ramo.aprobado {
+  background: #ffb6d5;
+  border-color: #ad1457;
+  color: #4a0032;
+  box-shadow: 0 0 12px #f06292a0;
+}
+
+.ramo .codigo {
+  font-size: 0.8em;
+  font-weight: bold;
+  color: #d81b60;
+  letter-spacing: 1px;
+}
+
+.ramo .nombre {
+  font-size: 1.13em;
+  font-weight: bold;
+  margin: 4px 0 2px 0;
+  color: #ad1457;
+}
+
+.ramo .creditos {
+  font-size: 0.85em;
+  color: #ba5370;
+}
+
+.ramo .requisitos {
+  font-size: 0.85em;
+  color: #d81b60c0;
+  margin-top: 3px;
+  line-height: 1.2;
+}
+
+@media (max-width: 1200px) {
+  #malla {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 700px;
+    gap: 10px;
+  }
+  .ramo {
+    min-width: 110px;
+    font-size: 0.98em;
+    padding: 10px 4px;
+  }
+  .semestre-titulo {
+    font-size: 1em;
+    padding: 5px 0;
+  }
+}
