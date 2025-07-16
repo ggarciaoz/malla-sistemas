@@ -1,7 +1,3 @@
-/**
- * Estructura de la malla, para fácil edición
- * Cada ramo tiene: código, nombre, créditos, requisitos (strings que coinciden con nombre o código)
- */
 const planEstudios = [
   {
     semestre: "1er Semestre",
@@ -100,18 +96,19 @@ const planEstudios = [
 let estadoRamos = {};
 planEstudios.forEach(s => s.ramos.forEach(r => estadoRamos[r.codigo] = false));
 
-// Renderizado
-const mallaContainer = document.getElementById('malla');
-function renderMalla() {
+// Renderizado vertical por columna
+const mallaContainer = document.getElementById('malla-grid');
+function renderMallaGrid() {
   mallaContainer.innerHTML = '';
-  // Para grid, una columna por semestre
   planEstudios.forEach((sem, i) => {
-    // Título vertical del semestre
+    const col = document.createElement('div');
+    col.className = 'sem-col';
+
+    // Título
     const titulo = document.createElement('div');
     titulo.className = 'semestre-titulo';
-    titulo.style.gridColumn = (i+1) + ' / ' + (i+2);
     titulo.innerText = sem.semestre;
-    mallaContainer.appendChild(titulo);
+    col.appendChild(titulo);
 
     sem.ramos.forEach(ramo => {
       const div = document.createElement('div');
@@ -131,8 +128,9 @@ function renderMalla() {
         div.onclick = () => aprobarRamo(ramo.codigo);
         div.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") aprobarRamo(ramo.codigo);}
       }
-      mallaContainer.appendChild(div);
+      col.appendChild(div);
     });
+    mallaContainer.appendChild(col);
   });
 }
 
@@ -141,7 +139,6 @@ function ramoDesbloqueado(ramo) {
   if (!ramo.requisitos) return true;
   let reqs = ramo.requisitos;
   let ok = true;
-  // Manejar requisitos especiales de porcentaje
   reqs.forEach(r => {
     if (typeof r === "object" && r.porcentaje) {
       ok = ok && (porcentajeAprobado() >= r.porcentaje);
@@ -185,8 +182,8 @@ function mostrarReq(ramo) {
 
 function aprobarRamo(codigo) {
   estadoRamos[codigo] = !estadoRamos[codigo];
-  renderMalla();
+  renderMallaGrid();
 }
 
 // Inicializar
-renderMalla();
+renderMallaGrid();
